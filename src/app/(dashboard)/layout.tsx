@@ -15,6 +15,7 @@ import ScrollToTop from '@core/components/scroll-to-top'
 
 // Util Imports
 import { getSystemMode } from '@core/utils/serverHelpers'
+import { Footer } from '@/ui'
 
 const Layout = async ({ children }: ChildrenType) => {
   // Vars
@@ -26,7 +27,7 @@ const Layout = async ({ children }: ChildrenType) => {
       <LayoutWrapper
         systemMode={systemMode}
         horizontalLayout={
-          <HorizontalLayout header={<Header />} footer={<>footer</>}>
+          <HorizontalLayout header={<Header />} footer={<Footer />}>
             {children}
           </HorizontalLayout>
         }
