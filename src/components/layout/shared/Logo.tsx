@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from 'react'
 
 // Next Imports
 // import Img from 'next/image'
+import LogoSVG from '@core/svg/Logo'
 import Link from 'next/link'
 
 // Third-party Imports
@@ -27,14 +28,15 @@ type LogoTextProps = {
 }
 
 const LogoText = styled.span<LogoTextProps>`
-  font-size: 1.25rem;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: 0.15px;
-  text-transform: capitalize;
+  font-size: 13.45px;
+  font-weight: 700;
+  line-height: 9.85px;
+  letter-spacing: -0.46919122338294983px;
+  text-align: center;
   color: var(--mui-palette-text-primary);
   transition: ${({ transitionDuration }) =>
     `margin-inline-start ${transitionDuration}ms ease-in-out, opacity ${transitionDuration}ms ease-in-out`};
+  padding-top: 20px;
 
   ${({ isHovered, isCollapsed }) =>
     isCollapsed && !isHovered ? 'opacity: 0; margin-inline-start: 0;' : 'opacity: 1; margin-inline-start: 8px;'}
@@ -74,13 +76,14 @@ const Logo = ({ component = false }: { component?: boolean }) => {
     // eslint-disable-next-line lines-around-comment
     /* @ts-ignore */
     <LogoWrapper className='flex items-center min-bs-[24px]' {...(!component && { href: '/' })}>
+      <LogoSVG />
       <LogoText
         ref={logoTextRef}
         isHovered={isHovered}
         isCollapsed={layout === 'collapsed'}
         transitionDuration={transitionDuration}
       >
-        {themeConfig.templateName}
+        Let’s do it
       </LogoText>
     </LogoWrapper>
   )

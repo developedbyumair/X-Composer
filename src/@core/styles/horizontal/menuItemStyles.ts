@@ -20,7 +20,7 @@ const menuItemStyles = (settings: Settings, theme: Theme, iconClass: string): Me
       ? {
           [`& .${menuClasses.button}.${menuClasses.active}`]: {
             color: 'var(--mui-palette-primary-contrastText) !important',
-            backgroundColor: 'var(--mui-palette-primary-main) !important',
+            backgroundColor: 'transparent !important',
             boxShadow: 'var(--mui-customShadows-xs)'
           }
         }

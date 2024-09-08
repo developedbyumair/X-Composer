@@ -21,7 +21,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   }
 
   &:not(.${horizontalLayoutClasses.headerBlur}) {
-    background-color: var(--mui-palette-background-paper);
+    background-color: #181818;
+    border-bottom: 2px solid #313335;
   }
 
   &.${horizontalLayoutClasses.headerBlur} {

@@ -1,5 +1,5 @@
 // MUI Imports
-import { useTheme } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
 
 // Type Imports
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
@@ -21,6 +21,7 @@ import menuItemStyles from '@core/styles/horizontal/menuItemStyles'
 import menuRootStyles from '@core/styles/horizontal/menuRootStyles'
 import verticalMenuItemStyles from '@core/styles/vertical/menuItemStyles'
 import verticalNavigationCustomStyles from '@core/styles/vertical/navigationCustomStyles'
+import { usePathname } from 'next/navigation'
 
 type RenderExpandIconProps = {
   level?: number
@@ -42,16 +43,38 @@ const RenderVerticalExpandIcon = ({ open, transitionDuration }: RenderVerticalEx
     <i className='ri-arrow-right-s-line' />
   </StyledVerticalNavExpandIcon>
 )
-
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  position: 'relative',
+  padding: '10px 0px',
+  color: '#939292',
+  transition: 'color 0.3s ease',
+  '&:hover': {
+    color: '#939292'
+  },
+  '&.active': {
+    color: 'white !important',
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: 3,
+      background: 'linear-gradient(90deg, #7F4FAB 0%, #EC9EA5 100%)'
+    }
+  }
+}))
 const HorizontalMenu = () => {
   // Hooks
   const verticalNavOptions = useVerticalNav()
   const theme = useTheme()
   const { settings } = useSettings()
+  const pathname = usePathname()
 
   // Vars
   const { skin } = settings
-  const { transitionDuration } = verticalNavOptions
+  const { transitionDuration, isToggled } = verticalNavOptions
+  const ContentMenuItem = !isToggled ? StyledMenuItem : MenuItem
 
   return (
     <HorizontalNav
@@ -59,8 +82,7 @@ const HorizontalMenu = () => {
       verticalNavContent={VerticalNavContent}
       verticalNavProps={{
         customStyles: verticalNavigationCustomStyles(verticalNavOptions, theme),
-        backgroundColor:
-          skin === 'bordered' ? 'var(--mui-palette-background-paper)' : 'var(--mui-palette-background-default)'
+        backgroundColor: '#181818'
       }}
     >
       <Menu
@@ -80,9 +102,12 @@ const HorizontalMenu = () => {
           renderExpandedMenuItemIcon: { icon: <i className='ri-circle-fill' /> }
         }}
       >
-        <MenuItem href='/home' icon={<i className='ri-home-smile-line' />}>
-          Home
-        </MenuItem>
+        <ContentMenuItem href='/home' className={pathname === '/home' ? 'active' : ''}>
+          My Brands
+        </ContentMenuItem>
+        <ContentMenuItem href='/posts-composer' className={pathname === '/posts-composer' ? 'active' : ''}>
+          Posts Composer
+        </ContentMenuItem>
       </Menu>
     </HorizontalNav>
   )

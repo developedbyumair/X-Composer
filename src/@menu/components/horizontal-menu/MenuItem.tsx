@@ -179,7 +179,7 @@ const MenuItem: ForwardRefRenderFunction<HTMLLIElement, MenuItemProps> = (props,
 
         {/* Menu Item Label */}
         <StyledMenuLabel
-          className={menuClasses.label}
+          className={`${menuClasses.label} text-xs font-bold leading-[14.52px] tracking-[0.05em] text-left`}
           rootStyles={getMenuItemStyles('label')}
           textTruncate={textTruncate}
         >
