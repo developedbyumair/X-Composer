@@ -1,3 +1,8 @@
+import { PublicLayout } from '@/ui'
+
+export const metadata = {
+  title: 'Home'
+}
 export default function Page() {
-  return <h1>Home page!</h1>
+  return <PublicLayout />
 }

@@ -8,7 +8,12 @@ const config: Config = {
   important: '#__next',
   plugins: [require('tailwindcss-logical'), require('./src/@core/tailwind/plugin')],
   theme: {
-    extend: {}
+    extend: {
+      backgroundImage: {
+        'custom-gradient':
+          'radial-gradient(88.57% 88.57% at 50% 50%, rgba(0, 126, 187, 0.09) 0%, rgba(37, 37, 37, 0.3) 100%)'
+      }
+    }
   }
 }
 
