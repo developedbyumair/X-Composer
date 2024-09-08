@@ -20,7 +20,7 @@ const useLayoutInit = (colorSchemeFallback: 'light' | 'dark') => {
   const isDark = useMedia('(prefers-color-scheme: dark)', colorSchemeFallback === 'dark')
 
   useEffect(() => {
-    const appMode = isDark ? 'dark' : 'light'
+    const appMode = 'dark'
 
     updateCookieColorPref(appMode)
 

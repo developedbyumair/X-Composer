@@ -58,7 +58,7 @@ export const SettingsProvider = (props: Props) => {
 
   // Initial Settings
   const initialSettings: Settings = {
-    mode: themeConfig.mode,
+    mode: 'dark',
     skin: themeConfig.skin,
     semiDark: themeConfig.semiDark,
     layout: themeConfig.layout,
