@@ -1,5 +1,6 @@
 import axios from 'axios'
 import crypto from 'crypto'
+import { TwitterApi } from 'twitter-api-v2'
 
 const baseUrl = 'https://api.x.com/2'
 const authUrl = 'https://x.com/i/oauth2/authorize'
@@ -79,6 +80,21 @@ export async function refreshAccessToken(refreshToken: string) {
   return response.data
 }
 
+export async function refreshTwitterToken(refreshToken: string) {
+  const client = new TwitterApi({
+    clientId: process.env.TWITTER_CLIENT_ID!,
+    clientSecret: process.env.TWITTER_CLIENT_SECRET!
+  })
+
+  try {
+    const { accessToken, refreshToken: newRefreshToken } = await client.refreshOAuth2Token(refreshToken)
+    return { accessToken, refreshToken: newRefreshToken }
+  } catch (error) {
+    console.error('Error refreshing Twitter token:', error)
+    throw error
+  }
+}
+
 export async function postTweet(text: string, accessToken: string) {
   const url = `${baseUrl}/tweets`
   const data = { text }
@@ -110,6 +126,22 @@ export async function getUserTweets(userId: string, accessToken: string) {
     return response.data
   } catch (error) {
     console.error('Error fetching user tweets:', error)
+    throw error
+  }
+}
+
+export async function verifyTokenPermissions(accessToken: string) {
+  const client = new TwitterApi(accessToken)
+  try {
+    // Try to get the authenticated user's information
+    const user = await client.v2.me()
+    console.log('Authenticated user:', user)
+
+    // You can add more checks here if needed
+
+    return true
+  } catch (error) {
+    console.error('Error verifying token permissions:', error)
     throw error
   }
 }

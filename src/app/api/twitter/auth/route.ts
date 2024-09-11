@@ -7,8 +7,13 @@ export async function GET() {
     const { url, state, codeVerifier } = await getOAuthUrl()
 
     // Store state and codeVerifier in cookies
-    cookies().set('x_oauth_state', state, { httpOnly: true, secure: true, sameSite: 'lax' })
-    cookies().set('x_oauth_code_verifier', codeVerifier, { httpOnly: true, secure: true, sameSite: 'lax' })
+    cookies().set('x_oauth_state', state, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: 3600 })
+    cookies().set('x_oauth_code_verifier', codeVerifier, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      maxAge: 3600
+    })
 
     return NextResponse.json({ url })
   } catch (error) {

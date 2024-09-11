@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     cookies().set('x_refresh_token', tokenData.refresh_token, { httpOnly: true, secure: true, sameSite: 'lax' })
 
     // Redirect to a success page or your app's main page
-    return NextResponse.redirect(new URL('/home', request.url))
+    return NextResponse.redirect(new URL('/posts-composer', request.url))
   } catch (error) {
     console.error('Error handling OAuth callback:', error)
     if (error instanceof Error) {

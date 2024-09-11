@@ -10,6 +10,7 @@ import TextFieldWithLabel from '@core/components/TextFieldWithLabel'
 import CustomAccordion from '@/@core/components/accordion/Accordion'
 import { ImageUploader } from '@/@core/components/image-uploader/ImageUploader'
 import { ImagePreview } from '@/@core/components/image-preview/ImagePreview'
+import { postUpdates } from '../pubsub'
 
 export const PostBodyLayout = () => {
   const [imageSrc, setImageSrc] = React.useState<string | null>(null)
@@ -54,7 +55,16 @@ export const PostBodyLayout = () => {
               summary={'Type the caption yourself.'}
               children={
                 <>
-                  <TextField InputLabelProps={{ shrink: true }} variant='outlined' multiline rows={3} fullWidth />
+                  <TextField
+                    InputLabelProps={{ shrink: true }}
+                    variant='outlined'
+                    multiline
+                    rows={3}
+                    fullWidth
+                    onBlur={e => {
+                      localStorage.setItem('currentPost', JSON.stringify({ caption: e.target.value }))
+                    }}
+                  />
                 </>
               }
             />
@@ -65,7 +75,14 @@ export const PostBodyLayout = () => {
               summary={
                 'Upload custom image or let AI create one for you. The selection of creatives have a limit of 10 at max.'
               }
-              children={<ImageUploader onImageUpload={image => setImageSrc(image)} />}
+              children={
+                <ImageUploader
+                  onImageUpload={image => {
+                    setImageSrc(image)
+                    postUpdates.publish('image', { image: image })
+                  }}
+                />
+              }
             />
           </Box>
         </Box>
