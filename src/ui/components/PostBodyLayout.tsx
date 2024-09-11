@@ -19,8 +19,8 @@ export const PostBodyLayout = () => {
         <Box aria-label='create-idea' className='w-full'>
           <Box className='p-3'>
             <Box component={'article'} className='flex justify-end items-end'>
-              <CustomAvatar size={30} color='secondary'>
-                <Icon icon='mdi:delete-outline' className='text-white text-2xl text-center' />
+              <CustomAvatar size={40}>
+                <Icon icon='mdi:delete-outline' className='text-2xl text-center' />
               </CustomAvatar>
             </Box>
             <Box className='flex flex-col gap-[2.5rem]'>
