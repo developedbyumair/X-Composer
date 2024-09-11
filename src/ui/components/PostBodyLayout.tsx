@@ -77,7 +77,7 @@ export const PostBodyLayout = () => {
               }
               children={
                 <ImageUploader
-                  onImageUpload={image => {
+                  onImageUpload={(image: any) => {
                     setImageSrc(image)
                     postUpdates.publish('image', { image: image })
                   }}
