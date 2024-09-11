@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
 
-export const ImageUploader = ({ onImageUpload }: { onImageUpload: (image: string) => void }) => {
+export const ImageUploader = ({ onImageUpload }: any) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [dragging, setDragging] = useState(false)
 
