@@ -15,19 +15,22 @@ import ScrollToTop from '@core/components/scroll-to-top'
 
 // Util Imports
 import { getSystemMode } from '@core/utils/serverHelpers'
+import { cookies } from 'next/headers'
+import { PostFooter } from '@/ui/components/PostFooter'
 import { Footer } from '@/ui'
 
 const Layout = async ({ children }: ChildrenType) => {
   // Vars
   const direction = 'ltr'
   const systemMode = getSystemMode()
+  const isAuthenticated = !!cookies().get('x_access_token')
 
   return (
     <Providers direction={direction}>
       <LayoutWrapper
         systemMode={systemMode}
         horizontalLayout={
-          <HorizontalLayout header={<Header />} footer={<Footer />}>
+          <HorizontalLayout header={<Header />} footer={isAuthenticated ? <PostFooter /> : <Footer />}>
             {children}
           </HorizontalLayout>
         }
