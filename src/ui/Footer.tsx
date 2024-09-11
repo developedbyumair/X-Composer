@@ -28,7 +28,7 @@ export const Footer = () => {
             }
           }}
         >
-          Connect
+          Continue
         </Button>
       </Box>
     </Box>
