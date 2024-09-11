@@ -8,6 +8,6 @@ export async function GET() {
     return NextResponse.json({ isAuthenticated: false }, { status: 401 })
   }
   const twitterClient = new TwitterApi(accessToken)
-  const user = await twitterClient.v2.me()
+  const user = await twitterClient.v2.me({ 'user.fields': ['profile_image_url'] })
   return NextResponse.json({ isAuthenticated: true, user })
 }
