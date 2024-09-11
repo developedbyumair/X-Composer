@@ -1,8 +1,22 @@
+'use client'
+
 import { Box, Button, Typography } from '@mui/material'
 import Image from 'next/image'
 import { Icon } from '@iconify/react'
 
 export const PublicLayout = () => {
+  const handleTwitterLogin = async () => {
+    try {
+      const response = await fetch('/api/twitter/auth', { method: 'GET' })
+      const data = await response.json()
+      if (data.url) {
+        window.location.href = data.url
+      }
+    } catch (error) {
+      console.error('Error initiating Twitter login:', error)
+    }
+  }
+
   return (
     <Box className='flex justify-center items-center mt-20'>
       <Box className='flex flex-col items-center'>
@@ -36,6 +50,7 @@ export const PublicLayout = () => {
                     'radial-gradient(88.57% 88.57% at 50% 50%, rgba(104, 197, 242, 0.3) 0%, rgba(37, 37, 37, 0.3) 100%)'
                 }
               }}
+              onClick={handleTwitterLogin}
             >
               Connect
             </Button>
