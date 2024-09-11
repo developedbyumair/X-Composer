@@ -30,7 +30,8 @@
     "react-perfect-scrollbar": "1.5.8",
     "react-toastify": "10.0.5",
     "react-use": "17.5.0",
-    "server-only": "0.0.1"
+    "server-only": "0.0.1",
+    "twitter-api-v2": "^1.17.2"
   },
   "devDependencies": {
     "@iconify/json": "2.2.206",
